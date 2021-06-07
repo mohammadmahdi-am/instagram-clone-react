@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const PORT = process.env.PORT || 8000
 const mongoose = require('mongoose')
-const {MONGO_URI} = require("./keys")
+const {MONGO_URI} = require("./config/keys")
 
 
  
