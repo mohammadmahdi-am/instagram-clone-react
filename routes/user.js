@@ -75,4 +75,16 @@ router.put("/unfollow", requireLogin, (req, res) => {
     }
   );
 });
+
+router.post("/updateprofile", requireLogin, (req, res) => {
+  const { pic } = req.body;
+  User.findByIdAndUpdate(req.user._id, { pic: pic }, { new: true })
+    .exec()
+    .then((result) => {
+      return res.json({ message: "profile picture successfully updated" });
+    })
+    .catch((err) => {
+      return res.json({ error: err });
+    });
+});
 module.exports = router;

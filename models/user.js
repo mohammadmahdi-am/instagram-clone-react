@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     pic : {
         type : String,
+        default: "https://res.cloudinary.com/instagramclone-ir/image/upload/v1623003136/51f6fb256629fc755b8870c801092942_ramvwg.png",
         required : true
     },
     password : {
