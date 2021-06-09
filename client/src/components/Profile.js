@@ -1,5 +1,6 @@
 import React,{useEffect,useState,useContext} from 'react'
 import {userContext} from '../App'
+import {useHistory} from 'react-router-dom'
 function Profile() {
     const [posts, setPosts] = useState([])
     const [name, setName] = useState("")
@@ -8,6 +9,7 @@ function Profile() {
     const [followers, setFollowers] = useState([])
     const [following, setFollowing] = useState([])
     const {state,dispatch} = useContext(userContext)
+    const history = useHistory()
     useEffect(() => {
         fetch("/myposts",{
             method:"GET",
@@ -46,7 +48,7 @@ function Profile() {
 
                 {posts.map((post,index)=>
                     (
-                        <div className="item" key={index}><img  src={post.photo} alt="" /></div>
+                        <div className="item" onClick={()=>history.push(`/singlepost/${post._id}`)} o key={index}><img  src={post.photo} alt=""  /></div>
 
                     )
                 )}

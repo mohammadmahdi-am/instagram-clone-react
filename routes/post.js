@@ -10,13 +10,14 @@ router.post ("/createpost",requireLogin,(req,res)=>{
     if(!title || !body || !pic){
         return res.status(422).json({error:"please add all the fields"})
     }
-    console.log(req.user)
+
     req.user.password = undefined
+    
     const post = new Post({
         title,
         body,
         photo:pic,
-        postedBy :  req.user
+        postedBy :  req.user._id
     }) 
     post.save().then(result=>{
         res.json({post:result})
@@ -33,7 +34,6 @@ router.get("/allposts",requireLogin,(req,res)=>{
     .populate("postedBy","_id name")
     .populate("comments.postedBy","_id name")
     .sort('-createdAt')
-    
     .then(posts=>{
         res.status(200).json({posts})
     }).catch(err=>{
@@ -43,6 +43,20 @@ router.get("/allposts",requireLogin,(req,res)=>{
     
 
 })
+
+router.get("/singlepost/:postid",requireLogin,(req,res)=>{
+
+    Post.findById(req.params.postid)
+    .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
+    .exec((err,result)=>{
+        if(err){
+            return res.json(err)
+        }
+        return res.json(result)
+    })
+})
+
 router.get("/myposts",requireLogin,(req,res)=>{
     
     Post.find({postedBy:req.user._id})

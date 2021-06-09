@@ -1,5 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import {useParams} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import {userContext} from '../App'
 function UserProfile() {
     const {state,dispatch} = useContext(userContext)
@@ -11,7 +12,7 @@ function UserProfile() {
     const [followers,setFollowers] = useState("")
     const [value, setvalue] = useState(0)
     const [userProfilePic, setUserProfilePic] = useState("0")
-  
+    const history = useHistory()
     const followUser = () =>{
         fetch("/follow",{
             method:"PUT",
@@ -85,7 +86,7 @@ function UserProfile() {
 
                 {pics.map((post,index)=>
                     (
-                        <div className="item" key={index}><img  src={post.photo} alt="" /></div>
+                        <div className="item" onClick={()=>history.push(`/singlepost/${post._id}`)} o key={index}><img  src={post.photo} alt=""  /></div>
 
                     )
                 )}

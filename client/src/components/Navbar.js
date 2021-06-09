@@ -29,9 +29,9 @@ function Navbar() {
   }  
     return (
         <nav >
-        <div class="nav-wrapper white" style={{padding:"0 20px"}} >
-          <Link to={state? "/" : "/signin"} class="brand-logo left">Instagram</Link>
-          <ul id="nav-mobile" class="right ">
+        <div className="nav-wrapper white" style={{padding:"0 20px"}} >
+          <Link to={state? "/" : "/signin"} className="brand-logo left">Instagram</Link>
+          <ul id="nav-mobile" className="right ">
            {renderList()}
           </ul>
         </div>

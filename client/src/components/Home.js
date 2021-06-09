@@ -13,10 +13,13 @@ const [value, setValue] = useState(0);
                 "Authorization" : "Bearer " + localStorage.jwt 
             }
         }).then(res=>res.json())
-        .then(data=>setPosts(data.posts))
+        .then(data=>{
+            console.log(data)
+            setPosts(data.posts)}
+            )
     }, [value])
 
-    const deltePost = (postId) => {
+    const deletePost = (postId) => {
         fetch(`/deletepost/${postId}`,{
         method:"DELETE",
             headers : {"Authorization" :"Bearer " + localStorage.getItem("jwt")}
@@ -137,7 +140,7 @@ const [value, setValue] = useState(0);
                  <div className="card home-card" key={index}>
                     <Link to={post.postedBy._id !== state._id ? `/profile/${post.postedBy._id}` : '/profile'} style={{display:"inline-block",margin:"0"}} >{post.postedBy.name}</Link>
                    
-                  {post.postedBy._id === state._id ? <i className="material-icons" onClick={()=>deltePost(post._id)}  style={{color:'red',cursor:"pointer",float:"right"}}>delete</i> : null }  
+                  {post.postedBy._id === state._id ? <i className="material-icons" onClick={()=>deletePost(post._id)}  style={{color:'red',cursor:"pointer",float:"right"}}>delete</i> : null }  
                     <div className="card-image">
                         <img  src={post.photo} alt="" />
                     </div>

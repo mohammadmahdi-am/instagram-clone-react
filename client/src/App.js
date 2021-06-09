@@ -10,6 +10,7 @@ import {useEffect,createContext,useReducer,useContext} from 'react'
 import {reducer,initialState} from './reducers/userReducer'
 import UserProfile from "./components/UserProfile";
 import FollowingPosts from "./components/FollowingPosts";
+import SignelPost from "./components/SignelPost";
 export const userContext = createContext()
 
 const Routing = () => {
@@ -49,6 +50,9 @@ const Routing = () => {
     </Route>
     <Route path="/myfollowingposts">
       <FollowingPosts/>
+    </Route>
+    <Route path="/singlepost/:postid">
+      <SignelPost />
     </Route>
     </Switch>
   )

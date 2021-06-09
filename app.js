@@ -16,7 +16,7 @@ mongoose.connection.on('error',(err)=>{
     console.log("error connecting",err) 
 })
 
-require('./models/user')
+require('./models/user') 
 require('./models/post')
  
 app.use(express.json())
